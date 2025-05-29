@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrackWay - Redefinindo a Interação Inteligente</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-bg': '#0A0A0C', // Darker background
+            'brand-surface': '#121215', // Slightly lighter surface
+            'brand-surface-alt': '#1E1E22', // Alternative surface
+            'brand-primary-text': '#F0F0F5', // Off-white primary text
+            'brand-secondary-text': '#A8A8B3', // Softer secondary text
+            'brand-accent-glow': '#00BFFF', // Deep Sky Blue - Primary Accent
+            'brand-accent-subtle': '#40CFFF', // Lighter shade of accent
+            'brand-accent-highlight': '#7DF9FF', // Electric Blue/Cyan for highlights
+
+            // Keep for specific components if needed, but primary theme is darker
+            'brand-brown-muted': '#3A322D', 
+            'brand-beige': '#F9F6F2',
+            'brand-text': '#1F2937',
+            'brand-teal-start': '#2DD4BF', 
+            'brand-blue-start': '#60A5FA',
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
+          },
+          boxShadow: {
+            'glow-accent': '0 0 20px 3px rgba(var(--color-brand-accent-glow-rgb), 0.4), 0 0 30px 8px rgba(var(--color-brand-accent-glow-rgb), 0.2)',
+            'glow-accent-strong': '0 0 30px 6px rgba(var(--color-brand-accent-glow-rgb), 0.6), 0 0 50px 12px rgba(var(--color-brand-accent-glow-rgb), 0.3)',
+            'glow-white-sm': '0 0 10px rgba(240,240,245,0.2)', // Brighter white glow
+            'inner-glow-white-sm': 'inset 0 0 6px rgba(240,240,245,0.08)',
+            'card-hover-dark': '0 12px 35px rgba(0,0,0,0.4)',
+            'interactive-glow': '0 0 15px rgba(var(--color-brand-accent-glow-rgb),0.3), 0 0 8px rgba(var(--color-brand-accent-highlight-rgb),0.2)',
+          },
+          textShadow: {
+            'glow-accent-soft': '0 0 10px rgba(var(--color-brand-accent-glow-rgb), 0.6)',
+            'glow-accent-md': '0 0 15px rgba(var(--color-brand-accent-glow-rgb), 0.8)',
+            'subtle-white': '0 0 5px rgba(240,240,245,0.3)',
+          },
+          animation: {
+            'fade-in-up': 'fadeInUp 1s ease-out forwards',
+            'text-reveal-blur': 'textRevealBlur 1.8s cubic-bezier(0.5, 1, 0.89, 1) forwards',
+            'subtle-glow-pulse': 'subtleGlowPulse 2.5s infinite ease-in-out',
+            'beam-scan': 'beamScan 10s infinite linear', // Slower, more subtle
+            'slide-in-left': 'slideInLeft 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards',
+            'slide-in-right': 'slideInRight 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards',
+            'auroraBorealis': 'auroraBorealis 25s infinite linear alternate',
+            'sparkle': 'sparkle 3.5s infinite ease-in-out', // Adjusted for new accents
+            'float': 'float 3.5s infinite ease-in-out',
+            'backgroundShine': 'backgroundShine 1s forwards',
+            'textPopIn': 'textPopIn 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+            'lightBeamPulse': 'lightBeamPulse 3.5s infinite ease-in-out',
+            'gradient-wave': 'gradientWave 15s ease infinite',
+            'hero-title-reveal': 'heroTitleReveal 2s ease-out forwards',
+            'text-focus-in': 'textFocusIn 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards'
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(40px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            textRevealBlur: {
+              '0%': { filter: 'blur(12px) brightness(1.8)', opacity: '0', transform: 'scale(1.1)' },
+              '100%': { filter: 'blur(0px) brightness(1)', opacity: '1', transform: 'scale(1)' },
+            },
+            subtleGlowPulse: {
+              '0%, 100%': { boxShadow: '0 0 15px rgba(var(--color-brand-accent-glow-rgb), 0.2), 0 0 20px rgba(var(--color-brand-accent-highlight-rgb), 0.1)' },
+              '50%': { boxShadow: '0 0 30px rgba(var(--color-brand-accent-glow-rgb), 0.4), 0 0 40px rgba(var(--color-brand-accent-highlight-rgb), 0.25)' },
+            },
+            beamScan: { // More subtle beam
+              '0%': { transform: 'translateY(-100%) scaleY(0.3)', opacity: '0' },
+              '20%': { transform: 'translateY(0%) scaleY(1)', opacity: '0.15' },
+              '80%': { transform: 'translateY(100%) scaleY(0.3)', opacity: '0.15' },
+              '100%': { transform: 'translateY(200%) scaleY(0.1)', opacity: '0' },
+            },
+             slideInLeft: {
+              '0%': { opacity: '0', transform: 'translateX(-60px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            slideInRight: {
+              '0%': { opacity: '0', transform: 'translateX(60px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            auroraBorealis: {
+              '0%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+              '100%': { backgroundPosition: '0% 50%' },
+            },
+            sparkle: { // Adjusted for new accent colors
+              '0%, 100%': { textShadow: '0 0 6px #fff, 0 0 12px #fff, 0 0 18px rgba(var(--color-brand-accent-glow-rgb),0.7), 0 0 24px rgba(var(--color-brand-accent-highlight-rgb),0.5)' },
+              '50%': { textShadow: '0 0 12px #fff, 0 0 24px #fff, 0 0 36px rgba(var(--color-brand-accent-glow-rgb),0.9), 0 0 48px rgba(var(--color-brand-accent-highlight-rgb),0.7)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+            backgroundShine: {
+              '0%': { backgroundPosition: '-200% center' },
+              '100%': { backgroundPosition: '200% center' },
+            },
+            textPopIn: { // Enhanced pop-in
+              '0%': { opacity: 0, transform: 'translateY(25px) scale(0.85)', filter: 'blur(6px)' },
+              '100%': { opacity: 1, transform: 'translateY(0) scale(1)', filter: 'blur(0px)' },
+            },
+            lightBeamPulse: {
+              '0%, 100%': { opacity: '0.08', filter: 'blur(100px)' }, // More subtle
+              '50%': { opacity: '0.16', filter: 'blur(120px)' },
+            },
+            gradientWave: { // For backgrounds or text
+              '0%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+              '100%': { backgroundPosition: '0% 50%' },
+            },
+            heroTitleReveal: {
+              '0%': { opacity: 0, transform: 'translateY(50px) skewY(5deg)', filter: 'blur(8px)'},
+              '100%': { opacity: 1, transform: 'translateY(0) skewY(0deg)', filter: 'blur(0px)'},
+            },
+            textFocusIn: { // Apple-like text focus
+              '0%': { filter: 'blur(12px)', opacity: '0' },
+              '100%': { filter: 'blur(0px)', opacity: '1' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      --color-brand-accent-glow: #00BFFF; /* Deep Sky Blue */
+      --color-brand-accent-glow-rgb: 0, 191, 255;
+      --color-brand-accent-subtle: #40CFFF; 
+      --color-brand-accent-subtle-rgb: 64, 207, 255;
+      --color-brand-accent-highlight: #7DF9FF; /* Electric Blue / Cyan */
+      --color-brand-accent-highlight-rgb: 125, 249, 255;
+      --color-yellow-glow-rgb: 250, 204, 21; 
+    }
+    .bg-noise {
+      position: relative;
+    }
+    .bg-noise::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100%; height: 100%;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY2bm5uPj4+AgICJiYmZmZmUlJSSkpKWFhYujo4NZftfAAAAFElEQVR42mN8//HLAFJMLogUYiN5ADEAJrgAY2H2GgYAAAAASUVORK5CYII=');
+      background-repeat: repeat;
+      opacity: 0.015; /* Even more subtle noise */
+      pointer-events: none;
+      z-index: 0; 
+    }
+    .content-over-noise {
+        position: relative;
+        z-index: 1;
+    }
+    .aurora-bg { /* Refined Aurora */
+      background: linear-gradient(60deg, 
+        rgba(var(--color-brand-accent-glow-rgb), 0.03) 0%, 
+        rgba(var(--color-brand-accent-subtle-rgb), 0.02) 25%, 
+        transparent 50%,
+        rgba(var(--color-brand-accent-highlight-rgb), 0.02) 75%, 
+        rgba(var(--color-brand-accent-glow-rgb), 0.04) 100%);
+      background-size: 300% 300%; /* Smoother animation */
+    }
+    .shine-effect {
+      position: relative;
+      overflow: hidden;
+    }
+    .shine-effect::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -200%; 
+      width: 150%; 
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(var(--color-brand-accent-highlight-rgb), 0.15), /* Use highlight color for shine */
+        transparent
+      );
+      transition: background-position 0s;
+    }
+    .shine-effect:hover::after {
+      animation: backgroundShine 0.8s forwards;
+    }
+
+    .animate-textPopIn span {
+      display: inline-block;
+      opacity: 0;
+      animation: textPopInChar 0.6s forwards; /* Slightly longer for smoother pop */
+    }
+    @keyframes textPopInChar {
+      from { opacity: 0; transform: translateY(15px) scale(0.88); filter: blur(4px); }
+      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
+    }
+
+    /* Custom scrollbar for a more modern look (WebKit browsers) */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--color-brand-surface, #121215);
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: rgba(var(--color-brand-accent-glow-rgb), 0.5);
+      border-radius: 10px;
+      border: 2px solid var(--color-brand-surface, #121215);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(var(--color-brand-accent-glow-rgb), 0.7);
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "path": "https://esm.sh/path@^0.12.7",
+    "vite": "https://esm.sh/vite@^6.3.5"
+  }
+}
+</script>
+</head>
+<body class="bg-brand-bg font-sans text-brand-primary-text antialiased selection:bg-brand-accent-glow selection:text-brand-bg">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
+<link rel="stylesheet" href="index.css">
+<script src="index.tsx" type="module"></script>
